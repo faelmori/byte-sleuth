@@ -1,3 +1,5 @@
+![ByteSleuth_Banner](docs/assets/top_banner_a.png)
+
 # 🕵️‍♂️ **ByteSleuth** — The Ghost Hunter for Hidden Characters  
 
 > "Elementary, my dear dev. The ghosts of hidden characters won't escape this audit!"  

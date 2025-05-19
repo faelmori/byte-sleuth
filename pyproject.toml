@@ -22,7 +22,7 @@ coverage-xml = { coverage-xml = "coverage xml" }
 coverage-html-report = { coverage-html-report = "coverage html" }
 
 [project]
-name = "byte-sleuth"
+name = "byteSleuth"
 version = "1.0.0"
 requires-python = ">=3.7"
 authors = [
@@ -57,10 +57,10 @@ test = ["pytest"]
 docs = ["mkdocs"]
 
 [project.urls]
-Homepage = "https://github.com/faelmori/byte-sleuth"
-Documentation = "https://github.com/faelmori/byte-sleuth/docs"
-Repository = "https://github.com/faelmori/byte-sleuth"
-"Bug Tracker" = "https://github.com/faelmori/byte-sleuth/issues"
+Homepage = "https://github.com/faelmori/byte_sleuth"
+Documentation = "https://github.com/faelmori/byte_sleuth/docs"
+Repository = "https://github.com/faelmori/byte_sleuth"
+"Bug Tracker" = "https://github.com/faelmori/byte_sleuth/issues"
 
 [project.scripts]
 byte-sleuth-cli = "byte_sleuth.cli:main"

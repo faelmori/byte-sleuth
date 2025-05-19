@@ -1,0 +1,28 @@
+{
+  "name": "bytesleuth-vscode",
+  "displayName": "ByteSleuth Scanner",
+  "description": "Scan open files for hidden/suspicious characters using ByteSleuth.",
+  "publisher": "mori",
+  "license": "MIT",
+  "licenseFile": "LICENSE",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/faelmori/byte_sleuth"
+  },
+  "version": "0.0.1",
+  "engines": { "vscode": ">=1.60.0" },
+  "activationEvents": [
+    "onCommand:bytesleuth.scanCurrentFile"
+  ],
+  "main": "extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "bytesleuth.scanCurrentFile",
+        "title": "ByteSleuth: Scan Current File"
+      }
+    ]
+  },
+  "categories": ["Other"]
+}

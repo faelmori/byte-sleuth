@@ -1,6 +1,6 @@
-![ByteSleuth_Banner](https://github.com/faelmori/byte_sleuth/blob/99ef53331900fac09b5d5b3bd2b0b4a3249647a8/docs/assets/top_banner_a.png)
+![ByteSleuth_Banner](/docs/assets/top_banner_a.png)
 
-# 🕵️‍♂️ **ByteSleuth** — O Caçador de Caracteres Ocultos
+# 🕵️‍♂️ **ByteSleuth** — Caçador de Caracteres Ocultos
 
 > "Elementar, meu caro dev. Os fantasmas dos caracteres ocultos não escaparão desta auditoria!"
 > — **CharlockHolmes**, o detetive dentro do ByteSleuth

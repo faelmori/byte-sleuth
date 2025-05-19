@@ -81,6 +81,23 @@ module.exports = {
 - Open a file in VSCode.
 - Press `Ctrl+Shift+P` and search for `ByteSleuth: Scan Current File`.
 - The result will be shown as a notification.
+- **Tip:** You can customize the command in `extension.js` to use advanced flags, e.g. `-F` (fail on detect), `-s` (sanitize), or log removed characters.
+
+### Example: Scan with fail-on-detect (exit code 1 if suspicious chars found)
+```js
+const command = `python3 byte_sleuth/byte_sleuth.py "${filePath}" -F`;
+```
+
+### Example: Log removed characters from PIPE
+```bash
+cat file.txt | python3 byte_sleuth/byte_sleuth.py -s -l removed_chars.log > sanitized.txt
+```
+
+---
+
+## Automation & CI/CD
+- Use the CLI with `-F` in pre-commit or CI to block code with hidden characters.
+- The extension can be combined with automation for full coverage.
 
 ## Requirements
 - Python 3 and ByteSleuth installed and available in your workspace.

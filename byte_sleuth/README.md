@@ -49,10 +49,23 @@ python src/byte_sleuth.py <target> [options]
 
 ### **CLI Examples**
 ```bash
-python src/byte_sleuth.py suspicious.txt -s -v
-python src/byte_sleuth.py ./data/ -r report.json
-cat file.txt | python src/byte_sleuth.py -s > sanitized.txt
-python src/byte_sleuth.py src/ -F  # For CI/pre-commit: fail if any issue found
+# Scan and sanitize a file, showing hashes and findings
+python byte_sleuth/byte_sleuth.py suspicious.txt -s -v
+
+# Scan a directory, output JSON report to file
+python byte_sleuth/byte_sleuth.py ./data/ -r report.json
+
+# Sanitize stdin (PIPE), output to sanitized.txt
+cat file.txt | python byte_sleuth/byte_sleuth.py -s > sanitized.txt
+
+# Scan from PIPE and fail (exit 1) if any suspicious character is found (for CI/pre-commit)
+cat file.txt | python byte_sleuth/byte_sleuth.py -F
+
+# Log all removed characters from PIPE to a custom log file
+cat file.txt | python byte_sleuth/byte_sleuth.py -s -l removed_chars.log > sanitized.txt
+
+# Scan a directory and fail if any file contains suspicious characters (CI/pre-commit)
+python byte_sleuth/byte_sleuth.py src/ -F
 ```
 
 ---
@@ -89,7 +102,7 @@ for cp, name, char, idx in findings:
   hooks:
     - id: byte-sleuth-scan
       name: ByteSleuth Unicode & ASCII Scanner
-      entry: python src/byte_sleuth.py src/ -F
+      entry: python byte_sleuth/byte_sleuth.py src/ -F
       language: system
       pass_filenames: false
 ```
@@ -97,7 +110,7 @@ for cp, name, char, idx in findings:
 ### **GitHub Actions Example**
 ```yaml
 - name: Scan for hidden characters
-  run: python src/byte_sleuth.py src/ -F
+  run: cat file.txt | python byte_sleuth/byte_sleuth.py -F
 ```
 
 ---
@@ -117,6 +130,19 @@ Some characters are **invisible but dangerous**—causing confusion in **source 
 - Formatting trickery affecting debugging & diffs
 
 ByteSleuth gives you a **detective's magnifying glass** to **expose them all**. 🔍
+
+
+## Comparison with other tools
+
+| Tool           | Unicode | ASCII Control | Sanitization | JSON Report | CLI/Automation | VSCode Integration |
+|----------------|---------|--------------|--------------|-------------|----------------|-------------------|
+| **ByteSleuth** |   ✔️    |      ✔️      |     ✔️       |     ✔️      |      ✔️        |        ✔️         |
+| grep/sed       |   ❌    |      ✔️      |     ❌       |     ❌      |      ✔️        |        ❌         |
+| ad-hoc scripts |   ❌    |      ✔️      |     ❌       |     ❌      |      ✔️        |        ❌         |
+
+- **ByteSleuth** covers Unicode, ASCII, sanitizes, generates reports, and integrates easily with automation and VSCode.
+- grep/sed are great for simple ASCII, but do not cover Unicode or sanitization.
+- Ad-hoc scripts are fragile and hard to maintain.
 
 ---
 

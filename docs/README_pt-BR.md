@@ -49,10 +49,23 @@ python src/byte_sleuth.py <alvo> [opções]
 
 ### **Exemplos de uso**
 ```bash
-python src/byte_sleuth.py arquivo.txt -s -v
-python src/byte_sleuth.py ./dados/ -r relatorio.json
-cat arquivo.txt | python src/byte_sleuth.py -s > limpo.txt
-python src/byte_sleuth.py src/ -F  # Para CI/pre-commit: falha se houver problema
+# Escaneia e sanitiza um arquivo, mostrando hashes e achados
+python byte_sleuth/byte_sleuth.py arquivo.txt -s -v
+
+# Escaneia um diretório, gera relatório JSON em arquivo
+python byte_sleuth/byte_sleuth.py ./dados/ -r relatorio.json
+
+# Sanitiza stdin (PIPE), saída para limpo.txt
+cat arquivo.txt | python byte_sleuth/byte_sleuth.py -s > limpo.txt
+
+# Escaneia via PIPE e falha (exit 1) se encontrar caractere suspeito (para CI/pre-commit)
+cat arquivo.txt | python byte_sleuth/byte_sleuth.py -F
+
+# Loga todos os caracteres removidos do PIPE em um log customizado
+cat arquivo.txt | python byte_sleuth/byte_sleuth.py -s -l removidos.log > limpo.txt
+
+# Escaneia diretório e falha se algum arquivo tiver caracteres suspeitos (CI/pre-commit)
+python byte_sleuth/byte_sleuth.py src/ -F
 ```
 
 ---
@@ -97,7 +110,7 @@ for cp, nome, char, idx in achados:
 ### **Exemplo GitHub Actions**
 ```yaml
 - name: Escanear caracteres ocultos
-  run: python src/byte_sleuth.py src/ -F
+  run: cat arquivo.txt | python byte_sleuth/byte_sleuth.py -F
 ```
 
 ---

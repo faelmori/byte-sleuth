@@ -7,10 +7,7 @@ This script simulates a log file containing hidden ASCII control characters (e.g
 that could disrupt log parsing, monitoring, or security tools. ByteSleuth is used to detect and sanitize these issues.
 """
 import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-
-from byte_sleuth.byte_sleuth import ByteSleuth
+from byte_sleuth import ByteSleuth
 
 log_file = "test_log_with_controls.log"
 

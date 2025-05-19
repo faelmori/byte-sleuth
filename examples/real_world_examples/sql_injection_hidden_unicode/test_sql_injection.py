@@ -7,10 +7,7 @@ This script simulates a scenario where a SQL injection payload is obfuscated usi
 The ByteSleuth package is used to detect and sanitize these hidden threats before they reach the database layer.
 """
 import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-
-from byte_sleuth.byte_sleuth import ByteSleuth
+from byte_sleuth import ByteSleuth
 
 # Simulate a user input with a hidden zero-width space in the SQL injection payload
 payload = "admin'\u200B OR 1=1 --"

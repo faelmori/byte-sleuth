@@ -7,10 +7,7 @@ This script simulates a source code file containing bidirectional override chara
 which can be used in attacks to visually obfuscate code logic. ByteSleuth is used to detect and sanitize these issues.
 """
 import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-
-from byte_sleuth.byte_sleuth import ByteSleuth
+from byte_sleuth import ByteSleuth
 
 code_file = "test_code_with_bidi.py"
 

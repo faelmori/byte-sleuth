@@ -7,11 +7,9 @@ This script simulates a JSON file containing invisible Unicode characters in key
 which can cause parsing errors or data integrity issues. ByteSleuth is used to detect and sanitize these issues.
 """
 import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-
 import json
-from byte_sleuth.byte_sleuth import ByteSleuth
+
+from byte_sleuth import ByteSleuth
 
 json_file = "test_json_with_invisible.json"
 

@@ -7,10 +7,7 @@ This example demonstrates how to use ByteSleuth to scan all files in a source di
 and print a summary report, without sanitizing files. This is useful for CI/CD, pre-commit hooks, or audits.
 """
 import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-
-from byte_sleuth.byte_sleuth import ByteSleuth
+from byte_sleuth import ByteSleuth
 
 # Directory to scan (simulate a codebase or data folder)
 source_dir = "../../examples/test_scan"

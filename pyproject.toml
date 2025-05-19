@@ -3,11 +3,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build]
-packages = ["src/byte_sleuth"]
-include = ["src/byte_sleuth"]
+packages = ["byte_sleuth"]
+include = ["byte_sleuth"]
 
 [tool.hatch.version]
-path = "src/byte_sleuth/__init__.py"
+path = "byte_sleuth/__init__.py"
 version = { format = "patch" }
 
 [tool.hatch.envs]
@@ -23,7 +23,7 @@ coverage-html-report = { coverage-html-report = "coverage html" }
 
 [project]
 name = "byteSleuth"
-version = "1.0.0"
+version = "1.0.1"
 requires-python = ">=3.7"
 authors = [
   { name = "Rafael Mori", email = "faelmori@gmail.com" }

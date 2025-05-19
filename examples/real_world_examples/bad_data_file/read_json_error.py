@@ -2,7 +2,7 @@ import json
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
-from src.byte_sleuth import ByteSleuth
+from byte_sleuth.byte_sleuth import ByteSleuth
 
 # Read the JSON file with invisible characters
 json_file = os.path.join(os.path.dirname(__file__), "test_json_with_invisible.json")
@@ -19,30 +19,20 @@ except json.JSONDecodeError as e:
     # If parsing fails, we can try to sanitize the data
     scanner = ByteSleuth(sanitize=True)
     scanner.backup = True
-    scanner.backup_file(json_file)
     findings = scanner.scan_file(json_file)
     if findings:
-        for cp, name, char in findings:
-            print(f"  - U+{cp:04X} {name} ({repr(char)})")
+        for cp, name, char, idx in findings:
+            print(f"  - U+{cp:04X} {name} ({repr(char)}) at position {idx}")
     # Backup the original data for reference
     
     # Attempt to sanitize the JSON data
-    sanitized_data = scanner.sanitize_text(data)
+    sanitized = scanner.sanitize_file(json_file)
     print("\nSanitized JSON content:")
-    print(repr(sanitized_data))
     # Try to load the sanitized JSON
     try:
-        parsed_data = json.loads(sanitized_data)
-        print("Sanitized JSON loaded successfully:", parsed_data)
-    except json.JSONDecodeError as e:
-        print("Failed to load sanitized JSON:", e)
-
-    # Clean up
-    del scanner
-    # Restore the original file
-    with open(json_file, "w", encoding="utf-8") as f:
-        f.write(data)
-    print("\nOriginal JSON file restored.")
-    # Clean up
-    os.remove(json_file+".bak")
-    
+        with open(json_file, "r", encoding="utf-8") as f:
+            sanitized_data = json.load(f)
+        print("\nSanitized JSON loaded successfully:", sanitized_data)
+    except Exception as e:
+        print("\nFailed to load sanitized JSON:", e)
+    scanner.restore_file(json_file)

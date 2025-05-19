@@ -11,7 +11,7 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
 import json
-from src.byte_sleuth import ByteSleuth
+from byte_sleuth.byte_sleuth import ByteSleuth
 
 json_file = "test_json_with_invisible.json"
 

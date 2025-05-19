@@ -10,7 +10,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
-from src.byte_sleuth import ByteSleuth
+from byte_sleuth.byte_sleuth import ByteSleuth
 
 # Simulate a user input with a hidden zero-width space in the SQL injection payload
 payload = "admin'\u200B OR 1=1 --"
@@ -38,3 +38,5 @@ with open(test_file, "r", encoding="utf-8") as f:
 
 # Clean up
 os.remove(test_file)
+
+

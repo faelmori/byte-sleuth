@@ -118,6 +118,19 @@ Some characters are **invisible but dangerous**—causing confusion in **source 
 
 ByteSleuth gives you a **detective's magnifying glass** to **expose them all**. 🔍
 
+
+## Comparison with other tools
+
+| Tool           | Unicode | ASCII Control | Sanitization | JSON Report | CLI/Automation | VSCode Integration |
+|----------------|---------|--------------|--------------|-------------|----------------|-------------------|
+| **ByteSleuth** |   ✔️    |      ✔️      |     ✔️       |     ✔️      |      ✔️        |        ✔️         |
+| grep/sed       |   ❌    |      ✔️      |     ❌       |     ❌      |      ✔️        |        ❌         |
+| ad-hoc scripts |   ❌    |      ✔️      |     ❌       |     ❌      |      ✔️        |        ❌         |
+
+- **ByteSleuth** covers Unicode, ASCII, sanitizes, generates reports, and integrates easily with automation and VSCode.
+- grep/sed are great for simple ASCII, but do not cover Unicode or sanitization.
+- Ad-hoc scripts are fragile and hard to maintain.
+
 ---
 
 ## 🚀 **Roadmap**

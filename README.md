@@ -1,4 +1,4 @@
-![ByteSleuth_Banner](docs/assets/top_banner_a.png)
+![ByteSleuth_Banner](https://github.com/faelmori/byte_sleuth/blob/99ef53331900fac09b5d5b3bd2b0b4a3249647a8/docs/assets/top_banner_a.png)
 
 # 🕵️‍♂️ **ByteSleuth** — The Ghost Hunter for Hidden Characters
 

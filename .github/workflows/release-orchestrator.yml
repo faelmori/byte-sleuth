@@ -1,0 +1,39 @@
+name: Orchestrate Full Release (PyPI, VSCode, GitHub)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish-pypi:
+    if: github.actor == 'faelmori'
+    uses: ./.github/workflows/publish.yml
+    with:
+      tag: ${{ github.ref_name }}
+    secrets: inherit
+
+  publish-vscode:
+    if: github.actor == 'faelmori'
+    needs: publish-pypi
+    uses: ./.github/workflows/publish-vscode-extension.yml
+    with:
+      tag: ${{ github.ref_name }}
+    secrets: inherit
+
+  github-release:
+    if: github.actor == 'faelmori'
+    needs: [publish-pypi, publish-vscode]
+    uses: ./.github/workflows/release.yml
+    with:
+      tag: ${{ github.ref_name }}
+    secrets: inherit
+
+  rollback:
+    if: failure() && github.actor == 'faelmori'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Rollback (manual intervention required)
+        run: |
+          echo "Release failed. Please check PyPI, VSCode Marketplace, and GitHub for partial releases."
+          echo "Manual cleanup may be required (ex: delete tag/release, unpublish extension, etc)."

@@ -101,9 +101,14 @@ cat file.txt | python3 byte_sleuth/byte_sleuth.py -s -l removed_chars.log > sani
 
 ## Requirements
 - Python 3 and ByteSleuth installed and available in your workspace.
+- **The extension will automatically use the same Python interpreter selected in VSCode** (including virtualenv, conda, or workspace Python). This ensures compatibility with your project environment.
+- Install ByteSleuth in the active Python environment:
+
+```bash
+pip install byte-sleuth
+```
 
 ---
-
 ## How to use in your repository
 - Place the `vscode-extension` folder at the root of your project.
 - In VSCode, open the folder and run `npm install`.

@@ -6,8 +6,40 @@ on:
       - 'v*'
 
 jobs:
+  set-version:
+    if: github.actor == 'faelmori'
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.extract_version.outputs.version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Extract version from tag
+        id: extract_version
+        run: |
+          TAG=${GITHUB_REF_NAME#v}
+          echo "version=$TAG" >> $GITHUB_OUTPUT
+      - name: Replace __VERSION__ in package.json
+        run: |
+          sed -i "s/\"__VERSION__\"/\"${{ steps.extract_version.outputs.version }}\"/g" vscode-extension/package.json
+      - name: Replace __VERSION__ in pyproject.toml
+        run: |
+          sed -i "s/^version = \".*\"/version = \"${{ steps.extract_version.outputs.version }}\"/g" pyproject.toml
+      - name: Replace __VERSION__ in __init__.py
+        run: |
+          sed -i "s/__version__ = \".*\"/__version__ = \"${{ steps.extract_version.outputs.version }}\"/g" byte_sleuth/__init__.py
+      - name: Upload updated sources
+        uses: actions/upload-artifact@v4
+        with:
+          name: updated-sources
+          path: |
+            vscode-extension/package.json
+            pyproject.toml
+            byte_sleuth/__init__.py
+
   publish-pypi:
     if: github.actor == 'faelmori'
+    needs: set-version
     uses: ./.github/workflows/publish.yml
     with:
       tag: ${{ github.ref_name }}

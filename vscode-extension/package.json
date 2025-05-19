@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://github.com/faelmori/byte_sleuth"
   },
-  "version": "1.0.2",
+  "version": "__VERSION__",
   "engines": { "vscode": ">=1.60.0" },
   "activationEvents": [
     "onCommand:bytesleuth.scanCurrentFile"

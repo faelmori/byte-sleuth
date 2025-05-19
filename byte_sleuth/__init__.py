@@ -13,7 +13,7 @@ __all__ = [
     "ByteSleuth"
 ]
 
-__version__ = "1.0.2"
+__version__ = "__VERSION__"  # Placeholder para CI/CD. Será substituído pelo workflow.
 __author__ = "Rafael Mori"
 __email__ = "faelmori@gmail.com"
 __license__ = "MIT"

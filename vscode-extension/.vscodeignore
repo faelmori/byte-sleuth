@@ -1,0 +1,4 @@
+# Ignore test files
+**/__tests__/**
+**/*.test.ts
+**/*.spec.ts

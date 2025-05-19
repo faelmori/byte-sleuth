@@ -46,5 +46,7 @@ jobs:
 
       - name: Publish to VSCode Marketplace
         if: ${{ success() }}
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
         run: |
-          vsce publish --pat ${{ secrets.VSCE_TOKEN }} --no-yarn
+          vsce publish --pat $VSCE_TOKEN --no-yarn

@@ -21,12 +21,50 @@ jobs:
       tag: ${{ github.ref_name }}
     secrets: inherit
 
-  github-release:
+  gather-artifacts:
     if: github.actor == 'faelmori'
     needs: [publish-pypi, publish-vscode]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download python dist
+        uses: actions/download-artifact@v4
+        with:
+          name: python-dist
+          path: dist/
+      - name: Download VSIX
+        uses: actions/download-artifact@v4
+        with:
+          name: vscode-extension-vsix
+          path: vsix/
+      - name: Generate changelog
+        id: changelog
+        uses: mikepenz/release-changelog-builder-action@v4
+        with:
+          configuration: ""
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set outputs
+        id: out
+        run: |
+          echo "python_dist=dist/*" >> $GITHUB_OUTPUT
+          echo "vsix=vsix/*.vsix" >> $GITHUB_OUTPUT
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "${{ steps.changelog.outputs.changelog }}" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+    outputs:
+      python_dist: ${{ steps.out.outputs.python_dist }}
+      vsix: ${{ steps.out.outputs.vsix }}
+      changelog: ${{ steps.out.outputs.changelog }}
+
+  github-release:
+    if: github.actor == 'faelmori'
+    needs: gather-artifacts
     uses: ./.github/workflows/release.yml
     with:
       tag: ${{ github.ref_name }}
+      changelog: ${{ needs.gather-artifacts.outputs.changelog }}
+      python_dist: ${{ needs.gather-artifacts.outputs.python_dist }}
+      vsix: ${{ needs.gather-artifacts.outputs.vsix }}
     secrets: inherit
 
   rollback:

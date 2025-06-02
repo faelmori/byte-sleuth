@@ -151,9 +151,10 @@ ByteSleuth gives you a **detective's magnifying glass** to **expose them all**. 
 - [x] Improve CLI interactivity
 - [x] Output JSON reports
 - [x] VSCode Extension
+- [x] Public changelog
 - [ ] HTML reports
 - [ ] Support for more file formats (zip, PDF, etc.)
-- [ ] Public changelog/roadmap
+- [ ] Public roadmap
 
 ---
 

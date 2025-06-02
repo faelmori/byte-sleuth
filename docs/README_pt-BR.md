@@ -138,9 +138,10 @@ ByteSleuth te dá uma **lupa de detetive** para expor todos eles. 🔍
 - [x] CLI interativa aprimorada
 - [x] Relatórios JSON
 - [x] Extensão VSCode
+- [x] Changelog publicado
 - [ ] Relatórios HTML
 - [ ] Suporte a mais formatos (zip, PDF, etc.)
-- [ ] Changelog/roadmap público
+- [ ] Roadmap público
 
 ---
 
